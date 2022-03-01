@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
       home: const MyHomePage(title: 'DONER APP'),
     );
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget registerDoner() {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(color: Colors.blue),
+      decoration: const BoxDecoration(color: Colors.purple),
       width: 200,
       height: 70,
       child: TextButton(
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget findDoner() {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(color: Colors.blue),
+      decoration: const BoxDecoration(color: Colors.purple),
       width: 200,
       height: 70,
       child: TextButton(
