@@ -41,7 +41,7 @@ class dropDownWidget extends StatelessWidget {
         color: Colors.black45,
       ),
       iconSize: 30,
-      buttonHeight: 60,
+      buttonHeight: 40,
       buttonPadding: const EdgeInsets.only(left: 20, right: 10),
       dropdownDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),

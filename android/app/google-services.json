@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "593735893581",
+    "project_id": "donerapp-d5250",
+    "storage_bucket": "donerapp-d5250.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593735893581:android:c0cf6290a197cb31521204",
+        "android_client_info": {
+          "package_name": "com.app.donerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593735893581-j07dqprmku1us1d64hnjururct9adnu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdpF7FGppzWrQRE_yPtNcT57UMA_L8eoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593735893581-j07dqprmku1us1d64hnjururct9adnu6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "593735893581-kcbqv7frimvt84d56h5o3l7di15gefdp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.donerapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

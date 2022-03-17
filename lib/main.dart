@@ -1,8 +1,14 @@
 import 'package:donerapp/find_doner.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:donerapp/register_doner.dart';
 
-void main() {
+Future<void> main() async {
+//1
+  WidgetsFlutterBinding.ensureInitialized();
+//2
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -57,9 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
       width: 200,
       height: 70,
       child: TextButton(
-          onPressed: (() => { 
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const Register_doner(),)) 
-          }),
+          onPressed: (() => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Register_doner(),
+                    ))
+              }),
           child: const Text(
             'DONATE BLOOD',
             style: TextStyle(
@@ -87,8 +97,12 @@ class _MyHomePageState extends State<MyHomePage> {
       height: 70,
       child: TextButton(
           onPressed: (() => {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const Find_Doner(),))
-          }),
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Find_Doner(),
+                    ))
+              }),
           child: const Text(
             'FIND BLOOD DONER',
             style: TextStyle(
