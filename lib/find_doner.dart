@@ -34,42 +34,6 @@ class _Find_DonerState extends State<Find_Doner> {
     ;
   }
 
-  // Widget donersList(BuildContext context, Iterable<DocumentSnapshot>? snapshot) {
-  //   return SafeArea(
-  //     child: Padding(
-  //       padding: const EdgeInsets.all(5.0),
-  //       child: SectionTableView(
-  //         sectionCount: 2,
-  //         numOfRowInSection: (section) {
-  //           return section == 0 ? 1 : (snapshot?.length);
-  //         },
-  //         cellAtIndexPath: (section, row) {
-  //           return section == 0
-  //               ? dropDownWidget(
-  //                   bGroup: (group) {
-  //                     setState(() {
-  //                       selectGroup = group;
-  //                       filteredUsers = snapshot?.where((element) => Users.fromSnapshot(element).bloodGroup == selectGroup);
-  //                     });
-  //                   },
-  //                 )
-  //               : _buildListItem(context, snapshot!.elementAt(row));
-  //         },
-  //         headerInSection: (section) {
-  //           return Container(
-  //             height: section == 0 ? 0 : 5.0,
-  //             color: Colors.white,
-  //           );
-  //         },
-  //         divider: Container(
-  //           color: Colors.white,
-  //           height: 1.0,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   CupertinoTableViewDelegate generateDelegate(
       Iterable<DocumentSnapshot>? snapshot) {
     return CupertinoTableViewDelegate(
@@ -92,6 +56,8 @@ class _Find_DonerState extends State<Find_Doner> {
                 selectGroup = group;
                 filteredUsers = snapshot?.where((element) =>
                     Users.fromSnapshot(element).bloodGroup == selectGroup);
+                debugPrint("${filteredUsers!.length}");
+                
               });
             },
           );
