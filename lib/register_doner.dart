@@ -1,6 +1,8 @@
+import 'package:donerapp/Models/Users.dart';
 import 'package:donerapp/Widgets/dropdownwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:donerapp/Models/DataRepository.dart';
 
 class Register_doner extends StatefulWidget {
   const Register_doner({Key? key}) : super(key: key);
@@ -10,6 +12,9 @@ class Register_doner extends StatefulWidget {
 }
 
 class _Register_donerState extends State<Register_doner> {
+
+  final DataRepository repository = DataRepository();
+
   String username = '';
   String userPhoneNo = '';
   String bloodGroup = '';
@@ -62,7 +67,11 @@ class _Register_donerState extends State<Register_doner> {
       return;
     }
 
-    showAlert('All data entered', context);
+    final newUser =
+      Users(username, phoneNo: userPhoneNo, bloodGroup: bloodGroup);
+    repository.addPet(newUser);
+    Navigator.of(context).pop();
+    
   }
 
   void showAlert(String msg, BuildContext context) {
