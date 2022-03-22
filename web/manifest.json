@@ -1,6 +1,6 @@
 {
-    "name": "donerapp",
-    "short_name": "donerapp",
+    "name": "Doner App",
+    "short_name": "Doner App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

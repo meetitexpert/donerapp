@@ -12,11 +12,11 @@ class Register_doner extends StatefulWidget {
 }
 
 class _Register_donerState extends State<Register_doner> {
-
   final DataRepository repository = DataRepository();
 
   String username = '';
   String userPhoneNo = '';
+  String userAddress = '';
   String bloodGroup = '';
 
   get set => null;
@@ -28,6 +28,17 @@ class _Register_donerState extends State<Register_doner> {
         border: OutlineInputBorder(),
         labelText: 'Username',
         hintText: 'Enter your name',
+      ),
+    );
+  }
+
+  Widget addressField() {
+    return TextField(
+      onChanged: (value) => {userAddress = value},
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'Address',
+        hintText: 'Enter your address',
       ),
     );
   }
@@ -67,11 +78,10 @@ class _Register_donerState extends State<Register_doner> {
       return;
     }
 
-    final newUser =
-      Users(username, phoneNo: userPhoneNo, bloodGroup: bloodGroup);
-    repository.addPet(newUser);
+    final newUser = Users(username, userAddress,
+        phoneNo: userPhoneNo, bloodGroup: bloodGroup);
+    repository.addUser(newUser);
     Navigator.of(context).pop();
-    
   }
 
   void showAlert(String msg, BuildContext context) {
@@ -102,6 +112,10 @@ class _Register_donerState extends State<Register_doner> {
               height: 10,
             ),
             phoneNoField(),
+            const SizedBox(
+              height: 10,
+            ),
+            addressField(),
             const SizedBox(
               height: 10,
             ),

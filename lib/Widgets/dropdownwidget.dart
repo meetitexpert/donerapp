@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 class dropDownWidget extends StatelessWidget {
-  dropDownWidget({ Key? key, required this.bGroup }) : super(key: key);
+  dropDownWidget({Key? key, required this.bGroup}) : super(key: key);
   final Function(String) bGroup;
 
-
   final List<String> genderItems = [
+    "All",
     "A+",
     "A-",
     "B+",

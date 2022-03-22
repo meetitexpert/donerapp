@@ -9,14 +9,17 @@ class DataRepository {
   Stream<QuerySnapshot> getStream() {
     return collection.snapshots();
   }
+
   // 3
-  Future<DocumentReference> addPet(Users user) {
+  Future<DocumentReference> addUser(Users user) {
     return collection.add(user.toJson());
   }
+
   // 4
   void updateUser(Users user) async {
     await collection.doc(user.referenceId).update(user.toJson());
   }
+
   // 5
   void deleteUser(Users user) async {
     await collection.doc(user.referenceId).delete();

@@ -3,12 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Users {
   // 1
   String name;
+  String address;
   String phoneNo;
   String bloodGroup;
   String? referenceId;
 
   // 2
-  Users(this.name,
+  Users(this.name, this.address,
       {required this.phoneNo, required this.bloodGroup, this.referenceId});
   // 3
   factory Users.fromSnapshot(DocumentSnapshot snapshot) {
@@ -18,7 +19,7 @@ class Users {
   }
 
   factory Users.fromJson(Map<String, dynamic> json) {
-    return Users(json['name'] as String,
+    return Users(json['name'] as String, json['address'] as String,
         phoneNo: json['phoneNo'] as String,
         bloodGroup: json['bloodGroup'] as String);
   }
@@ -30,6 +31,7 @@ class Users {
 
   Map<String, dynamic> _usersToJson(Users instance) => <String, dynamic>{
         'name': instance.name,
+        'address': instance.address,
         'phoneNo': instance.phoneNo,
         'bloodGroup': instance.bloodGroup,
       };

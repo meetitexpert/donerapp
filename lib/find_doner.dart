@@ -4,6 +4,7 @@ import 'package:donerapp/Widgets/dropdownwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_table_view/cupertino_table_view.dart';
 import 'package:donerapp/Models/DataRepository.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Find_Doner extends StatefulWidget {
   const Find_Doner({Key? key}) : super(key: key);
@@ -13,10 +14,22 @@ class Find_Doner extends StatefulWidget {
 }
 
 // ignore: camel_case_types
-class _Find_DonerState extends State<Find_Doner> {
-  String selectGroup = '';
+class _Find_DonerState extends State<Find_Doner>
+    with AutomaticKeepAliveClientMixin<Find_Doner> {
+  String selectGroup = 'All';
   final DataRepository repository = DataRepository();
   late Iterable<DocumentSnapshot>? filteredUsers = [];
+  late Iterable<DocumentSnapshot>? allUsersData = [];
+
+  @override
+  bool get wantKeepAlive => true;
+
+  Widget _noDataFound(BuildContext context) {
+    return const ListTile(
+      minVerticalPadding: 200,
+      title: Center(child: Text('No Data Found')),
+    );
+  }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
     // 4
@@ -24,14 +37,30 @@ class _Find_DonerState extends State<Find_Doner> {
 
     final name = user.name;
     final pNo = user.phoneNo;
+    final address = user.address;
     final bGroup = user.bloodGroup;
     return Card(
       child: ListTile(
-        title: Text(name),
-        subtitle: Text('$pNo\n$bGroup'),
+        contentPadding: const EdgeInsets.all(5),
+        title: Text(
+          name,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          '$pNo\n$address\n$bGroup',
+          style: TextStyle(height: 1.5),
+        ),
+        trailing: IconButton(
+          icon: const Icon(
+            Icons.call,
+            color: Colors.blue,
+          ),
+          onPressed: () {
+            launch("tel:$pNo");
+          },
+        ),
       ),
     );
-    ;
   }
 
   CupertinoTableViewDelegate generateDelegate(
@@ -41,7 +70,7 @@ class _Find_DonerState extends State<Find_Doner> {
       numberOfRowsInSection: (section) {
         var rows = 0;
         if (section != 0) {
-          rows = snapshot!.length;
+          rows = snapshot!.isEmpty ? 1 : snapshot.length;
         } else {
           rows = 1;
         }
@@ -54,15 +83,20 @@ class _Find_DonerState extends State<Find_Doner> {
             bGroup: (group) {
               setState(() {
                 selectGroup = group;
-                filteredUsers = snapshot?.where((element) =>
-                    Users.fromSnapshot(element).bloodGroup == selectGroup);
-                debugPrint("${filteredUsers!.length}");
-                
+                if (selectGroup == "All") {
+                  filteredUsers = [];
+                } else {
+                  filteredUsers = allUsersData?.where((element) =>
+                      Users.fromSnapshot(element).bloodGroup == selectGroup);
+                  debugPrint("${filteredUsers!.length}");
+                }
               });
             },
           );
         } else {
-          return _buildListItem(context, snapshot!.elementAt(indexPath.row));
+          return snapshot!.isEmpty
+              ? _noDataFound(context)
+              : _buildListItem(context, snapshot.elementAt(indexPath.row));
         }
       },
       headerInSection: (context, section) => Container(
@@ -73,7 +107,7 @@ class _Find_DonerState extends State<Find_Doner> {
 
       pressedOpacity: 0.4,
       canSelectRowAtIndexPath: (indexPath) => true,
-      didSelectRowAtIndexPath: (indexPath) => print('$indexPath'),
+      didSelectRowAtIndexPath: (indexPath) => debugPrint('$indexPath'),
       // marginForSection: marginForSection, // set marginForSection when using boxShadow
     );
   }
@@ -95,7 +129,11 @@ class _Find_DonerState extends State<Find_Doner> {
           stream: repository.getStream(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const LinearProgressIndicator();
-            filteredUsers = snapshot.data?.docs ?? [];
+            allUsersData = snapshot.data?.docs ?? [];
+            if (selectGroup == "All") {
+              filteredUsers = allUsersData;
+            }
+
             return donersList(context, filteredUsers);
           }),
     );
