@@ -1,3 +1,4 @@
+import 'package:donerapp/aboutus.dart';
 import 'package:donerapp/find_doner.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.purple,
       ),
-      home: const MyHomePage(title: 'DONER APP'),
+      home: const MyHomePage(title: 'Rida Trust'),
     );
   }
 }
@@ -113,6 +114,29 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget aboutUs() {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(color: Colors.purple),
+      width: 200,
+      height: 70,
+      child: TextButton(
+          onPressed: (() => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const aboutus(),
+                    ))
+              }),
+          child: const Text(
+            'ABOUT US',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+            textAlign: TextAlign.center,
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -156,6 +180,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 10,
             ),
             findDoner(),
+            const SizedBox(
+              height: 20,
+            ),
+            aboutUs(),
           ],
         ),
       ),
