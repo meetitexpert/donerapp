@@ -3,6 +3,7 @@ import 'package:donerapp/Widgets/dropdownwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:donerapp/Models/DataRepository.dart';
+import 'package:flutter/services.dart';
 
 class Register_doner extends StatefulWidget {
   const Register_doner({Key? key}) : super(key: key);
@@ -24,6 +25,10 @@ class _Register_donerState extends State<Register_doner> {
   Widget nameField() {
     return TextField(
       onChanged: (value) => {username = value},
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(15),
+        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+      ],
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         labelText: 'Username',
@@ -35,10 +40,14 @@ class _Register_donerState extends State<Register_doner> {
   Widget addressField() {
     return TextField(
       onChanged: (value) => {userAddress = value},
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(15),
+        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+      ],
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Address',
-        hintText: 'Enter your address',
+        labelText: 'City',
+        hintText: 'Enter your city',
       ),
     );
   }
