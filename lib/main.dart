@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.purple,
       ),
-      home: const MyHomePage(title: 'Rida Trust'),
+      home: const MyHomePage(title: 'SKT Blood'),
     );
   }
 }

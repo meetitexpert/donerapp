@@ -9,12 +9,17 @@ class aboutus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('About us')),
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: const Image(
-          image: AssetImage('assets/aboutus.png'),
-          fit: BoxFit.fitHeight,
-        ),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: const Image(
+              image: AssetImage('assets/aboutus.jpeg'),
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          Flexible(child: Text('Developed by B-Technos', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),))
+        ],
       ),
     );
   }
